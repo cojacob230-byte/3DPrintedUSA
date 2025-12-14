@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>3DPrintedUSA – Secure 3D Print Shop</title>
+<title>3DPrintedUSA – Bitcoin 3D Print Shop</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -11,20 +11,16 @@
 body{font-family:Inter,sans-serif;background:#0a0a0a;color:#fff;line-height:1.6}
 header{padding:25px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
 header h1{font-size:24px;font-weight:800}
-nav a{color:#fff;margin-left:20px;text-decoration:none;opacity:.8}
-nav a:hover{opacity:1}
 .hero{text-align:center;padding:120px 30px}
-.hero h2{font-size:50px;font-weight:800;margin-bottom:15px}
+.hero h2{font-size:48px;font-weight:800;margin-bottom:15px}
 .hero p{opacity:.8;max-width:700px;margin:auto}
-.section{padding:80px 40px;max-width:1200px;margin:auto}
+.section{padding:70px 40px;max-width:1200px;margin:auto}
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;margin-top:40px}
 .product{background:#111;border:1px solid #222;border-radius:14px;padding:25px}
-.product h3{margin-bottom:10px}
 .price{opacity:.7;margin-bottom:15px}
 button{background:#1f8cff;border:none;color:#fff;padding:10px 18px;border-radius:20px;cursor:pointer}
-#cart{position:fixed;top:90px;right:20px;background:#111;border:1px solid #222;border-radius:14px;padding:20px;width:280px}
-#cart h4{margin-bottom:10px}
-.cart-item{font-size:14px;opacity:.85;margin-bottom:5px}
+#paybar{display:none;position:fixed;bottom:0;left:0;width:100%;background:#111;border-top:1px solid #222;padding:20px;text-align:center}
+#paybar p{opacity:.85;margin-top:8px;font-size:14px}
 footer{text-align:center;padding:40px;border-top:1px solid #222;opacity:.6}
 </style>
 </head>
@@ -32,62 +28,62 @@ footer{text-align:center;padding:40px;border-top:1px solid #222;opacity:.6}
 
 <header>
 <h1>3DPrintedUSA</h1>
-<nav>
-<a href="#shop">Shop</a>
-<a href="#checkout">Checkout</a>
-</nav>
 </header>
 
 <section class="hero">
 <h2>Premium 3D Printed Products</h2>
-<p>High-quality custom and ready-made 3D printed products. Secure crypto checkout.</p>
+<p>Bitcoin-only checkout. Anonymous. Secure. No accounts required.</p>
 </section>
 
-<section class="section" id="shop">
+<section class="section">
 <h2>Shop</h2>
 <div class="products">
 <div class="product">
 <h3>Desk Organizer</h3>
 <div class="price">$24.99</div>
-<button onclick="addToCart('Desk Organizer',24.99)">Add to Cart</button>
+<button onclick="showPay()">Buy with Bitcoin</button>
 </div>
 <div class="product">
 <h3>Phone Stand</h3>
 <div class="price">$14.99</div>
-<button onclick="addToCart('Phone Stand',14.99)">Add to Cart</button>
+<button onclick="showPay()">Buy with Bitcoin</button>
 </div>
 <div class="product">
 <h3>Custom 3D Print</h3>
 <div class="price">Custom</div>
-<button onclick="addToCart('Custom 3D Print',0)">Add to Cart</button>
+<button onclick="showPay()">Buy with Bitcoin</button>
 </div>
 </div>
 </section>
 
-<div id="cart">
-<h4>Cart</h4>
-<div id="cartItems"></div>
-<p>Total: $<span id="total">0.00</span></p>
-<button onclick="checkout()">Checkout (Bitcoin)</button>
+<div id="paybar">
+<strong>Bitcoin Address</strong><br>
+<span style="word-break:break-all">YOUR_BITCOIN_ADDRESS_HERE</span>
+<p>Address for shipping and name for shipping (no real name required)</p>
 </div>
-
-<section class="section" id="checkout">
-<h2>Bitcoin Checkout</h2>
-<p>Send the exact amount to the Bitcoin address below. Your order will be processed after confirmation.</p>
-<p><strong>Bitcoin Address:</strong></p>
-<p style="word-break:break-all">YOUR_BITCOIN_ADDRESS_HERE</p>
-<p><strong>Network:</strong> Bitcoin (BTC)</p>
-</section>
 
 <footer>
 © 2025 3DPrintedUSA · Bitcoin Payments Only
 </footer>
 
 <script>
-let cart=[];
-function addToCart(name,price){cart.push({name,price});renderCart();}
-function renderCart(){let el=document.getElementById('cartItems');el.innerHTML='';let total=0;cart.forEach(i=>{el.innerHTML+=`<div class="cart-item">${i.name}</div>`;total+=i.price});document.getElementById('total').innerText=total.toFixed(2)}
-function checkout(){location.hash='checkout'}
+function showPay(){document.getElementById('paybar').style.display='block'}
+
+// Anonymous chat username
+var anonName = 'user_' + Math.random().toString(36).substring(2,8);
+
+// Tawk.to anonymous live chat (replace ID)
+var Tawk_API=Tawk_API||{};
+Tawk_API.visitor = { name: anonName };
+var Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/YOUR_TAWK_ID/1abcdef';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
 
 </body>
