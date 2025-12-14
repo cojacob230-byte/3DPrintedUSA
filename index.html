@@ -1,215 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>3DPrintedUSA – Premium 3D Printed Products</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>3DPrintedUSA – Secure 3D Print Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0a0a0a;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-    header {
-      padding: 30px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      background: #0a0a0a;
-      z-index: 100;
-    }
-    header h1 {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-    nav a {
-      color: #fff;
-      margin-left: 25px;
-      text-decoration: none;
-      font-weight: 400;
-      opacity: 0.8;
-    }
-    nav a:hover { opacity: 1; }
-
-    .hero {
-      padding: 140px 40px;
-      text-align: center;
-      background: radial-gradient(circle at top, #111 0%, #0a0a0a 60%);
-    }
-    .hero h2 {
-      font-size: 52px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 18px;
-      opacity: 0.85;
-      max-width: 760px;
-      margin: auto;
-    }
-
-    .cta {
-      margin-top: 40px;
-      display: inline-block;
-      padding: 14px 28px;
-      border-radius: 30px;
-      background: #1f8cff;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 0 25px rgba(31,140,255,0.45);
-    }
-
-    .section {
-      padding: 90px 40px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .section h3 {
-      font-size: 34px;
-      margin-bottom: 20px;
-    }
-    .section p {
-      opacity: 0.85;
-      max-width: 800px;
-    }
-
-    .products {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-    }
-    .product {
-      background: linear-gradient(180deg, #111, #0c0c0c);
-      padding: 25px;
-      border-radius: 16px;
-      border: 1px solid #222;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .product:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-    .product h4 { margin-bottom: 10px; font-size: 20px; }
-    .price { opacity: 0.7; margin: 10px 0; }
-
-    .buy-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      border-radius: 20px;
-      background: #1f8cff;
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    footer {
-      padding: 50px 30px;
-      text-align: center;
-      border-top: 1px solid #222;
-      opacity: 0.6;
-      font-size: 14px;
-    }
-
-    /* Chat button */
-    .chat-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #1f8cff;
-      color: white;
-      border: none;
-      padding: 15px 22px;
-      border-radius: 50px;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 0 0 25px rgba(31,140,255,0.5);
-      z-index: 200;
-    }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#0a0a0a;color:#fff;line-height:1.6}
+header{padding:25px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+header h1{font-size:24px;font-weight:800}
+nav a{color:#fff;margin-left:20px;text-decoration:none;opacity:.8}
+nav a:hover{opacity:1}
+.hero{text-align:center;padding:120px 30px}
+.hero h2{font-size:50px;font-weight:800;margin-bottom:15px}
+.hero p{opacity:.8;max-width:700px;margin:auto}
+.section{padding:80px 40px;max-width:1200px;margin:auto}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;margin-top:40px}
+.product{background:#111;border:1px solid #222;border-radius:14px;padding:25px}
+.product h3{margin-bottom:10px}
+.price{opacity:.7;margin-bottom:15px}
+button{background:#1f8cff;border:none;color:#fff;padding:10px 18px;border-radius:20px;cursor:pointer}
+#cart{position:fixed;top:90px;right:20px;background:#111;border:1px solid #222;border-radius:14px;padding:20px;width:280px}
+#cart h4{margin-bottom:10px}
+.cart-item{font-size:14px;opacity:.85;margin-bottom:5px}
+footer{text-align:center;padding:40px;border-top:1px solid #222;opacity:.6}
+</style>
 </head>
 <body>
 
 <header>
-  <h1>3DPrintedUSA</h1>
-  <nav>
-    <a href="#shop">Shop</a>
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<h1>3DPrintedUSA</h1>
+<nav>
+<a href="#shop">Shop</a>
+<a href="#checkout">Checkout</a>
+</nav>
 </header>
 
 <section class="hero">
-  <h2>Premium 3D Printed Products</h2>
-  <p>High-quality 3D printed products, prototypes, and custom designs. Built with precision, modern materials, and professional finishing.</p>
-  <a href="#shop" class="cta">Browse Products</a>
+<h2>Premium 3D Printed Products</h2>
+<p>High-quality custom and ready-made 3D printed products. Secure crypto checkout.</p>
 </section>
 
 <section class="section" id="shop">
-  <h3>Shop</h3>
-  <p>Ready-to-ship 3D printed products made with durable materials and modern designs.</p>
-
-  <div class="products">
-    <div class="product">
-      <h4>Desk Organizer</h4>
-      <p>Minimalist 3D printed desk organizer, strong and lightweight.</p>
-      <div class="price">$24.99</div>
-      <a class="buy-btn" href="#">Buy Now</a>
-    </div>
-
-    <div class="product">
-      <h4>Phone Stand</h4>
-      <p>Modern phone stand compatible with all devices.</p>
-      <div class="price">$14.99</div>
-      <a class="buy-btn" href="#">Buy Now</a>
-    </div>
-
-    <div class="product">
-      <h4>Custom Part</h4>
-      <p>Need something custom? We design and print to your specifications.</p>
-      <div class="price">Custom Pricing</div>
-      <a class="buy-btn" href="#contact">Request Quote</a>
-    </div>
-  </div>
+<h2>Shop</h2>
+<div class="products">
+<div class="product">
+<h3>Desk Organizer</h3>
+<div class="price">$24.99</div>
+<button onclick="addToCart('Desk Organizer',24.99)">Add to Cart</button>
+</div>
+<div class="product">
+<h3>Phone Stand</h3>
+<div class="price">$14.99</div>
+<button onclick="addToCart('Phone Stand',14.99)">Add to Cart</button>
+</div>
+<div class="product">
+<h3>Custom 3D Print</h3>
+<div class="price">Custom</div>
+<button onclick="addToCart('Custom 3D Print',0)">Add to Cart</button>
+</div>
+</div>
 </section>
 
-<section class="section" id="services">
-  <h3>Services</h3>
-  <p>
-    • Custom 3D Design & Prototyping<br>
-    • Small & Medium Batch Printing<br>
-    • Functional Parts & Accessories<br>
-    • Fast Turnaround & Worldwide Shipping
-  </p>
+<div id="cart">
+<h4>Cart</h4>
+<div id="cartItems"></div>
+<p>Total: $<span id="total">0.00</span></p>
+<button onclick="checkout()">Checkout (Bitcoin)</button>
+</div>
+
+<section class="section" id="checkout">
+<h2>Bitcoin Checkout</h2>
+<p>Send the exact amount to the Bitcoin address below. Your order will be processed after confirmation.</p>
+<p><strong>Bitcoin Address:</strong></p>
+<p style="word-break:break-all">YOUR_BITCOIN_ADDRESS_HERE</p>
+<p><strong>Network:</strong> Bitcoin (BTC)</p>
 </section>
 
-<section class="section" id="about">
-  <h3>About 3DPrintedUSA</h3>
-  <p>
-    3DPrintedUSA specializes in professional-grade 3D printing solutions. We focus on quality, precision, and modern design to deliver products that last.
-  </p>
-</section>
-
-<footer id="contact">
-  © 2025 3DPrintedUSA · All rights reserved
+<footer>
+© 2025 3DPrintedUSA · Bitcoin Payments Only
 </footer>
 
-<button class="chat-btn" onclick="alert('Live chat coming soon')">
-  💬 Chat
-</button>
+<script>
+let cart=[];
+function addToCart(name,price){cart.push({name,price});renderCart();}
+function renderCart(){let el=document.getElementById('cartItems');el.innerHTML='';let total=0;cart.forEach(i=>{el.innerHTML+=`<div class="cart-item">${i.name}</div>`;total+=i.price});document.getElementById('total').innerText=total.toFixed(2)}
+function checkout(){location.hash='checkout'}
+</script>
 
 </body>
 </html>
