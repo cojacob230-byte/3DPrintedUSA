@@ -12,7 +12,7 @@
   --danger:#c92a2a; --ok:#6dff9c;
   --shadow:rgba(0,0,0,0.5);
 }
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;line-height:1.7;font-size:16px;}
 .container{max-width:1200px;margin:auto;padding:0 20px;}
 .center{text-align:center;}
@@ -21,10 +21,10 @@ h1,h2,h3,h4,h5{margin-bottom:16px;font-weight:800;}
 p{margin-bottom:16px;opacity:.9;}
 
 /* Banner */
-.ship-banner{position:fixed;top:0;left:0;right:0;height:36px;display:flex;align-items:center;justify-content:center;background:var(--danger);font-weight:800;letter-spacing:.3px;z-index:200;box-shadow:0 2px 8px var(--shadow);font-size:16px;}
+.ship-banner{position:fixed;top:0;left:0;right:0;height:36px;display:flex;align-items:center;justify-content:center;background:var(--danger);font-weight:800;letter-spacing:.3px;z-index:200;box-shadow:0 2px 8px var(--shadow);font-size:16px;transition:transform .3s;}
 
 /* Header */
-header{position:sticky;top:36px;background:var(--bg);border-bottom:1px solid var(--border);z-index:150;box-shadow:0 2px 10px var(--shadow);}
+header{position:sticky;top:36px;background:var(--bg);border-bottom:1px solid var(--border);z-index:150;box-shadow:0 2px 10px var(--shadow);transition:transform .3s;}
 .header-inner{display:flex;justify-content:space-between;align-items:center;padding:18px 0;}
 nav a{color:#fff;margin-left:18px;text-decoration:none;opacity:.85;font-weight:600;transition:.3s;}
 nav a:hover{opacity:1; color:var(--accent);}
@@ -74,7 +74,6 @@ footer{text-align:center;padding:80px 20px;border-top:1px solid var(--border);op
 .hero h2{font-size:44px}
 .products{grid-template-columns:1fr}
 }
-
 @media(max-width:600px){
 .hero{padding:80px 15px 40px 15px;}
 .hero h2{font-size:28px;}
@@ -91,9 +90,9 @@ select, button{font-size:16px;padding:10px 16px;}
 </head>
 <body>
 
-<div class="ship-banner">🚚 Worldwide Shipping · International 1–2 weeks · USA 5–7 days</div>
+<div class="ship-banner" id="shipBanner">🚚 Worldwide Shipping · International 1–2 weeks · USA 5–7 days</div>
 
-<header>
+<header id="mainHeader">
   <div class="container header-inner">
     <h1>3DPrintedUSA</h1>
     <nav>
@@ -104,17 +103,16 @@ select, button{font-size:16px;padding:10px 16px;}
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="heroSection">
   <h2>Premium 3D Printed Products</h2>
   <p>Bitcoin-only checkout · Fully anonymous · Discreet worldwide shipping</p>
   <div class="stars">★★★★☆ 4.8 / 5.0</div>
 </section>
 
-<section class="section container">
+<section class="section container" id="materialsSection">
 <h2>Our Materials & Process</h2>
 <p class="center max">
-All products are <strong>handcrafted or 3D printed</strong> using our <strong>PLA+</strong> filament
-blended with <strong>carbon and metal particles</strong> for extra strength. 100% infill ensures maximum durability. Orders are checked rigorously. Bitcoin-only payments protect privacy. Discreet worldwide packaging.
+All products are <strong>handcrafted or 3D printed</strong> using our <strong>PLA+</strong> filament blended with <strong>carbon and metal particles</strong> for extra strength. 100% infill ensures maximum durability. Orders are checked rigorously. Bitcoin-only payments protect privacy. Discreet worldwide packaging.
 </p>
 </section>
 
@@ -179,77 +177,35 @@ Payments are final once confirmed on the blockchain. Always verify your country�
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
+// BTC & Cart
 const BTC_ADDRESS="bc1qdsv6cw95hmqkzn05zuxncx6cvcfn4ezh0rq9hy";
 const colors=["Red","Blue","Yellow","White","Black"];
 let cart=[],btcRate=0;
-
-const products=[
-{name:"Not a Glock .22LR Kit",price:350,images:["NAG2.jpg"]},
-{name:"HD22 Kit",price:500,images:["hs222.jpg"]},
-{name:"Gambino Kit",price:250,images:["gambino2.jpg"]},
-{name:"Cabfare Kit",price:200,images:["cabfare2.jpg"]},
-{name:"Harlot Kit",price:150,images:["harlot2.jpg"]},
-{name:"HD22 Complete",price:625,images:["hs22.jpg"]},
-{name:"Not a Glock .22LR Complete",price:560,images:["NAG.jpg"]},
-{name:"Gambino Complete",price:400,images:["gambino.jpg"]},
-{name:"Cabfare Complete",price:350,images:["cabfare.jpg"]},
-{name:"Harlot Complete",price:250,images:["harlot.jpg"]},
-{name:"Glock Switch",price:25,images:["switch.jpg"]},
-];
+const products=[{name:"Not a Glock .22LR Kit",price:350,images:["NAG2.jpg"]},{name:"HD22 Kit",price:500,images:["hs222.jpg"]},{name:"Gambino Kit",price:250,images:["gambino2.jpg"]},{name:"Cabfare Kit",price:200,images:["cabfare2.jpg"]},{name:"Harlot Kit",price:150,images:["harlot2.jpg"]},{name:"HD22 Complete",price:625,images:["hs22.jpg"]},{name:"Not a Glock .22LR Complete",price:560,images:["NAG.jpg"]},{name:"Gambino Complete",price:400,images:["gambino.jpg"]},{name:"Cabfare Complete",price:350,images:["cabfare.jpg"]},{name:"Harlot Complete",price:250,images:["harlot.jpg"]},{name:"Glock Switch",price:25,images:["switch.jpg"]}];
 
 function renderProducts(){
 const c=document.getElementById("productsContainer");
 c.innerHTML="";
 products.forEach(p=>{
-c.innerHTML+=`
-<div class="product">
-<div class="carousel">
-${p.images.map(i=>`<img src="${i}">`).join("")}
-</div>
-<h3>${p.name}</h3>
-<p>€${p.price}</p>
-<select id="c_${p.name}">
-${colors.map(c=>`<option>${c}</option>`).join("")}
-</select>
-<button onclick="addToCart('${p.name}',${p.price})">Add to Cart</button>
-</div>`;
+c.innerHTML+=`<div class="product"><div class="carousel">${p.images.map(i=>`<img src="${i}">`).join("")}</div><h3>${p.name}</h3><p>€${p.price}</p><select id="c_${p.name}">${colors.map(c=>`<option>${c}</option>`).join("")}</select><button onclick="addToCart('${p.name}',${p.price})">Add to Cart</button></div>`;
 });
 }
 renderProducts();
 
-function addToCart(name,price){
-const color=document.getElementById("c_"+name).value;
-cart.push({name,price,color});
-renderCart();toast();
-}
-
+function addToCart(name,price){const color=document.getElementById("c_"+name).value;cart.push({name,price,color});renderCart();toast();}
 function renderCart(){
 let el=document.getElementById("cartItems"),t=0,shipping=0;
 el.innerHTML="";
-cart.forEach((i,idx)=>{
-  el.innerHTML+=`${i.name} (${i.color}) <span onclick="cart.splice(${idx},1);renderCart()">✕</span><br>`;
-  t+=i.price;
-});
-
-if(t>=200) shipping = 0;
-else if(t>0) shipping = 15;
-else shipping = 0;
-
+cart.forEach((i,idx)=>{el.innerHTML+=`${i.name} (${i.color}) <span onclick="cart.splice(${idx},1);renderCart()">✕</span><br>`; t+=i.price;});
+if(t>=200) shipping=0; else if(t>0) shipping=15; else shipping=0;
 document.getElementById("shippingCost").innerText="Shipping: €"+shipping.toFixed(2);
-let totalWithShipping = t + shipping;
-document.getElementById("total").innerText=totalWithShipping.toFixed(2);
-
-document.getElementById("minOrderWarning").innerText = totalWithShipping < 50 ? "Minimum order is €50. Amount will be refunded if below €50." : "";
+document.getElementById("total").innerText=(t+shipping).toFixed(2);
+document.getElementById("minOrderWarning").innerText=(t+shipping)<50?"Minimum order is €50. Amount will be refunded if below €50.":"";
 }
-
 function showCart(){document.getElementById("cartPopup").style.display="block"}
 function closeCart(){document.getElementById("cartPopup").style.display="none"}
-function showPay(){
-const total=parseFloat(document.getElementById("total").innerText);
-if(total<50){alert("Order must be at least €50."); return;}
-document.getElementById("paybar").style.display="block";
-const usd=cart.reduce((a,b)=>a+b.price,0);
-const btc=(usd*btcRate).toFixed(6);
+function showPay(){const total=parseFloat(document.getElementById("total").innerText);if(total<50){alert("Order must be at least €50."); return;}
+document.getElementById("paybar").style.display="block";const usd=cart.reduce((a,b)=>a+b.price,0);const btc=(usd*btcRate).toFixed(6);
 document.getElementById("usdAmount").innerText="USD: $"+usd;
 document.getElementById("btcAmount").innerText="BTC: "+btc;
 document.getElementById("btcAddress").innerText=BTC_ADDRESS;
@@ -258,6 +214,19 @@ new QRCode(document.getElementById("qr"),`bitcoin:${BTC_ADDRESS}?amount=${btc}`)
 function closePay(){document.getElementById("paybar").style.display="none"}
 function toast(){const t=document.getElementById("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1200);}
 fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd").then(r=>r.json()).then(d=>btcRate=1/d.bitcoin.usd);
+
+// Only hide banner + header on scroll
+let lastScroll=0;
+const hideElements=[document.getElementById('shipBanner'), document.getElementById('mainHeader')];
+window.addEventListener('scroll',()=>{
+  const currentScroll=window.pageYOffset;
+  if(currentScroll>lastScroll && currentScroll>50){
+    hideElements.forEach(el=>el.style.transform='translateY(-150%)');
+  } else {
+    hideElements.forEach(el=>el.style.transform='translateY(0)');
+  }
+  lastScroll=currentScroll;
+});
 </script>
 </body>
 </html>
