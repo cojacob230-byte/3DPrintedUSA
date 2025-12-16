@@ -102,50 +102,44 @@ footer{text-align:center;padding:80px 20px;border-top:1px solid var(--border);op
   <div class="stars">★★★★☆ 4.8 / 5.0</div>
 </section>
 
-<!-- Story -->
 <section class="section container">
 <h2>Our Materials & Process</h2>
 <p class="center max">
-All products are <strong>handcrafted or 3D printed</strong> using our <strong>own PLA+</strong> filament
-blended with <strong>carbon and metal particles</strong> for extra strength. We print every item
-with <strong>100% infill</strong> ensuring maximum durability. Our expert staff performs rigorous
-quality checks on every product. <br><br>
-We only accept <strong>Bitcoin payments</strong> to protect customer privacy. No accounts,
-emails, or personal information are stored, ensuring full anonymity. Each item is carefully
-packaged for discreet shipping worldwide.
+All products are <strong>handcrafted or 3D printed</strong> using our <strong>PLA+</strong> filament
+blended with <strong>carbon and metal particles</strong> for extra strength. 100% infill ensures maximum durability. Orders are checked rigorously. Bitcoin-only payments protect privacy. Discreet worldwide packaging.
 </p>
 </section>
 
-<!-- Shop -->
 <section class="section container" id="shop">
 <h2>Shop</h2>
 <div class="products" id="productsContainer"></div>
 </section>
 
-<!-- Shipping, Privacy & Warranty -->
 <section class="section container">
 <h2>Shipping, Privacy & Warranty</h2>
 <div class="stack">
 <div class="product"><h3>Worldwide Shipping</h3>
-<p>Tracked shipping to 150+ countries. USA: 5–7 days. International: 1–2 weeks. Fully discreet packaging.</p></div>
+<p>Tracked shipping to 150+ countries. USA: 5–7 days. International: 1–2 weeks. Orders above €200 ship free. Orders below €50 will be refunded.</p></div>
 <div class="product"><h3>Privacy First</h3>
-<p>We store no personal information. Bitcoin-only payment protects your anonymity.</p></div>
+<p>No personal info stored. Bitcoin-only payment ensures anonymity.</p></div>
 <div class="product"><h3>6-Month Warranty</h3>
-<p>All products come with a 6-month functional warranty. Defective items are replaced or refunded.</p></div>
-<div class="product"><h3>Bitcoin Payments</h3>
-<p>Only Bitcoin accepted. USA customers can buy via Cash App. International: use trusted exchanges.</p></div>
+<p>All products come with 6-month functional warranty. Defective items replaced or refunded.</p></div>
+<div class="product"><h3>Immediate Start</h3>
+<p>We start processing your order <strong>immediately after payment</strong>.</p></div>
+<div class="product"><h3>Minimum Order Policy</h3>
+<p>Orders below €50 will be refunded. Minimum €50 per order.</p></div>
+<div class="product"><h3>Follow us on TikTok</h3>
+<p>Check out our new account: <strong>@3DPrintedUSA</strong></p></div>
 </div>
 </section>
 
-<!-- Disclaimer -->
 <section class="section container" id="disclaimer">
 <h2>Legal & Payment Disclaimer</h2>
 <p class="center max" style="opacity:.85">
-Customers are responsible for compliance with all local, state, and national laws.
-We cannot be held liable for misuse of our products.<br><br>
+Customers are responsible for compliance with all local, state, and national laws. We cannot be held liable for misuse of our products.<br><br>
 <strong>Payment:</strong><br>
-• USA: Buy Bitcoin via Cash App → send to our address.<br>
-• International: Use any trusted Bitcoin exchange to send payment.<br><br>
+• USA: Buy Bitcoin via Cash App → <a href="https://cash.app/" target="_blank" style="color:#1f8cff">send BTC</a>.<br>
+• International: Use any trusted Bitcoin exchange (e.g., <a href="https://www.binance.com/en" target="_blank" style="color:#1f8cff">Binance</a>) to buy BTC.<br><br>
 Payments are final once confirmed on the blockchain. Always verify your country’s laws before ordering.
 </p>
 </section>
@@ -154,8 +148,10 @@ Payments are final once confirmed on the blockchain. Always verify your country�
 <button class="close" onclick="closeCart()">×</button>
 <h4>Shopping Cart</h4>
 <div id="cartItems"></div>
-<p>Total: $<span id="total">0.00</span></p>
+<p id="shippingCost">Shipping: €0.00</p>
+<p>Total: €<span id="total">0.00</span></p>
 <button style="width:100%" onclick="showPay()">Checkout (Bitcoin)</button>
+<p id="minOrderWarning" style="color:#c92a2a;font-weight:700;"></p>
 </div>
 
 <div id="paybar">
@@ -164,6 +160,8 @@ Payments are final once confirmed on the blockchain. Always verify your country�
 <p id="btcAmount"></p>
 <p id="btcAddress" style="word-break:break-all;font-weight:700"></p>
 <canvas id="qr"></canvas>
+<p style="margin-top:15px;">USA: <a href="https://cash.app/" target="_blank" style="color:#1f8cff">Pay via Cash App</a></p>
+<p>International: <a href="https://www.binance.com/en" target="_blank" style="color:#1f8cff">Buy BTC via Exchange</a></p>
 </div>
 
 <div class="toast" id="toast">Added to cart</div>
@@ -178,17 +176,17 @@ const colors=["Red","Blue","Yellow","White","Black"];
 let cart=[],btcRate=0;
 
 const products=[
-{name:"Not a Glock .22LR Kit", price:350, images:["https://placehold.co/600x400?text=Not+a+Glock+.22LR+Kit+Front","https://placehold.co/600x400?text=Not+a+Glock+.22LR+Kit+Side"]},
-{name:"HD22 Kit", price:500, images:["https://placehold.co/600x400?text=HD22+Front","https://placehold.co/600x400?text=HD22+Side"]},
-{name:"Gambino Kit", price:250, images:["https://placehold.co/600x400?text=Gambino+Front","https://placehold.co/600x400?text=Gambino+Side"]},
-{name:"Cabfare Kit", price:200, images:["https://placehold.co/600x400?text=Cabfare+Front","https://placehold.co/600x400?text=Cabfare+Side"]},
-{name:"Harlot Kit", price:150, images:["https://placehold.co/600x400?text=Harlot+Front","https://placehold.co/600x400?text=Harlot+Side"]},
-{name:"HD22 Complete", price:625, images:["https://placehold.co/600x400?text=HD22+Complete+Front","https://placehold.co/600x400?text=HD22+Complete+Side"]},
-{name:"Not a Glock .22LR Complete", price:560, images:["https://placehold.co/600x400?text=Not+a+Glock+.22LR+Complete+Front","https://placehold.co/600x400?text=Not+a+Glock+.22LR+Complete+Side"]},
-{name:"Gambino Complete", price:400, images:["https://placehold.co/600x400?text=Gambino+Complete+Front","https://placehold.co/600x400?text=Gambino+Complete+Side"]},
-{name:"Cabfare Complete", price:350, images:["https://placehold.co/600x400?text=Cabfare+Complete+Front","https://placehold.co/600x400?text=Cabfare+Complete+Side"]},
-{name:"Harlot Complete", price:250, images:["https://placehold.co/600x400?text=Harlot+Complete+Front","https://placehold.co/600x400?text=Harlot+Complete+Side"]},
-{name:"Switch", price:25, images:["https://placehold.co/600x400?text=Switch+Front","https://placehold.co/600x400?text=Switch+Side"]}
+{name:"Not a Glock .22LR Kit",price:350,images:["https://placehold.co/600x400?text=Not+a+Glock+.22LR+Kit"]},
+{name:"HD22 Kit",price:500,images:["https://placehold.co/600x400?text=HD22+Kit"]},
+{name:"Gambino Kit",price:250,images:["https://placehold.co/600x400?text=Gambino+Kit"]},
+{name:"Cabfare Kit",price:200,images:["https://placehold.co/600x400?text=Cabfare+Kit"]},
+{name:"Harlot Kit",price:150,images:["https://placehold.co/600x400?text=Harlot+Kit"]},
+{name:"HD22 Complete",price:625,images:["https://placehold.co/600x400?text=HD22+Complete"]},
+{name:"Not a Glock .22LR Complete",price:560,images:["https://placehold.co/600x400?text=Not+a+Glock+.22LR+Complete"]},
+{name:"Gambino Complete",price:400,images:["https://placehold.co/600x400?text=Gambino+Complete"]},
+{name:"Cabfare Complete",price:350,images:["https://placehold.co/600x400?text=Cabfare+Complete"]},
+{name:"Harlot Complete",price:250,images:["https://placehold.co/600x400?text=Harlot+Complete"]},
+{name:"Switch",price:25,images:["https://placehold.co/600x400?text=Switch"]},
 ];
 
 function renderProducts(){
@@ -201,7 +199,7 @@ c.innerHTML+=`
 ${p.images.map(i=>`<img src="${i}">`).join("")}
 </div>
 <h3>${p.name}</h3>
-<p>$${p.price}</p>
+<p>€${p.price}</p>
 <select id="c_${p.name}">
 ${colors.map(c=>`<option>${c}</option>`).join("")}
 </select>
@@ -216,15 +214,31 @@ const color=document.getElementById("c_"+name).value;
 cart.push({name,price,color});
 renderCart();toast();
 }
+
 function renderCart(){
-let el=document.getElementById("cartItems"),t=0;
+let el=document.getElementById("cartItems"),t=0,shipping=0;
 el.innerHTML="";
-cart.forEach((i,idx)=>{el.innerHTML+=`${i.name} (${i.color}) <span onclick="cart.splice(${idx},1);renderCart()">✕</span><br>`;t+=i.price;});
-document.getElementById("total").innerText=t.toFixed(2);
+cart.forEach((i,idx)=>{
+  el.innerHTML+=`${i.name} (${i.color}) <span onclick="cart.splice(${idx},1);renderCart()">✕</span><br>`;
+  t+=i.price;
+});
+
+if(t>=200) shipping = 0;
+else if(t>0) shipping = 15;
+else shipping = 0;
+
+document.getElementById("shippingCost").innerText="Shipping: €"+shipping.toFixed(2);
+let totalWithShipping = t + shipping;
+document.getElementById("total").innerText=totalWithShipping.toFixed(2);
+
+document.getElementById("minOrderWarning").innerText = totalWithShipping < 50 ? "Minimum order is €50. Amount will be refunded if below €50." : "";
 }
+
 function showCart(){document.getElementById("cartPopup").style.display="block"}
 function closeCart(){document.getElementById("cartPopup").style.display="none"}
 function showPay(){
+const total=parseFloat(document.getElementById("total").innerText);
+if(total<50){alert("Order must be at least €50."); return;}
 document.getElementById("paybar").style.display="block";
 const usd=cart.reduce((a,b)=>a+b.price,0);
 const btc=(usd*btcRate).toFixed(6);
