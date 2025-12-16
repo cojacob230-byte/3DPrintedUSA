@@ -29,11 +29,6 @@ header{position:sticky;top:36px;background:var(--bg);border-bottom:1px solid var
 nav a{color:#fff;margin-left:18px;text-decoration:none;opacity:.85;font-weight:600;transition:.3s;}
 nav a:hover{opacity:1; color:var(--accent);}
 
-/* Language selector */
-.lang-select{display:flex;align-items:center;gap:8px;margin-left:20px;}
-.lang-select img{width:24px;height:16px;cursor:pointer;border:1px solid #333;border-radius:3px;transition:.3s;}
-.lang-select img:hover{transform:scale(1.2);}
-
 /* Hero */
 .hero{text-align:center;padding:140px 20px 80px 20px;background:linear-gradient(135deg,#0a0a0a,#111111);}
 .hero h2{font-size:56px;font-weight:800;line-height:1.1;margin-bottom:16px;}
@@ -92,14 +87,7 @@ footer{text-align:center;padding:80px 20px;border-top:1px solid var(--border);op
 
 <header>
   <div class="container header-inner">
-    <div style="display:flex; align-items:center; gap:20px;">
-      <h1>3DPrintedUSA</h1>
-      <div class="lang-select" id="langSelect">
-        <img src="https://flagcdn.com/us.svg" alt="USA" title="USA" onclick="changeLang('en','us')">
-        <img src="https://flagcdn.com/de.svg" alt="Germany" title="Germany" onclick="changeLang('de','de')">
-        <img src="https://flagcdn.com/fr.svg" alt="France" title="France" onclick="changeLang('fr','fr')">
-      </div>
-    </div>
+    <h1>3DPrintedUSA</h1>
     <nav>
       <a href="#shop">Shop</a>
       <a href="#" onclick="showCart()">Cart</a>
@@ -109,14 +97,15 @@ footer{text-align:center;padding:80px 20px;border-top:1px solid var(--border);op
 </header>
 
 <section class="hero">
-  <h2 id="heroTitle">Premium 3D Printed Products</h2>
-  <p id="heroDesc">Bitcoin-only checkout · Fully anonymous · Discreet worldwide shipping</p>
+  <h2>Premium 3D Printed Products</h2>
+  <p>Bitcoin-only checkout · Fully anonymous · Discreet worldwide shipping</p>
   <div class="stars">★★★★☆ 4.8 / 5.0</div>
 </section>
 
+<!-- Story -->
 <section class="section container">
-<h2 id="materialTitle">Our Materials & Process</h2>
-<p class="center max" id="materialDesc">
+<h2>Our Materials & Process</h2>
+<p class="center max">
 All products are <strong>handcrafted or 3D printed</strong> using our <strong>own PLA+</strong> filament
 blended with <strong>carbon and metal particles</strong> for extra strength. We print every item
 with <strong>100% infill</strong> ensuring maximum durability. Our expert staff performs rigorous
@@ -127,13 +116,15 @@ packaged for discreet shipping worldwide.
 </p>
 </section>
 
+<!-- Shop -->
 <section class="section container" id="shop">
-<h2 id="shopTitle">Shop</h2>
+<h2>Shop</h2>
 <div class="products" id="productsContainer"></div>
 </section>
 
+<!-- Shipping, Privacy & Warranty -->
 <section class="section container">
-<h2 id="shippingTitle">Shipping, Privacy & Warranty</h2>
+<h2>Shipping, Privacy & Warranty</h2>
 <div class="stack">
 <div class="product"><h3>Worldwide Shipping</h3>
 <p>Tracked shipping to 150+ countries. USA: 5–7 days. International: 1–2 weeks. Fully discreet packaging.</p></div>
@@ -146,9 +137,10 @@ packaged for discreet shipping worldwide.
 </div>
 </section>
 
+<!-- Disclaimer -->
 <section class="section container" id="disclaimer">
-<h2 id="disclaimerTitle">Legal & Payment Disclaimer</h2>
-<p class="center max" id="disclaimerDesc" style="opacity:.85">
+<h2>Legal & Payment Disclaimer</h2>
+<p class="center max" style="opacity:.85">
 Customers are responsible for compliance with all local, state, and national laws.
 We cannot be held liable for misuse of our products.<br><br>
 <strong>Payment:</strong><br>
@@ -186,8 +178,17 @@ const colors=["Red","Blue","Yellow","White","Black"];
 let cart=[],btcRate=0;
 
 const products=[
-{name:"HD22 Kit",price:500,images:["https://placehold.co/600x400?text=HD22+Front","https://placehold.co/600x400?text=HD22+Side"]},
-{name:"Gambino Complete",price:400,images:["https://placehold.co/600x400?text=Gambino+Front","https://placehold.co/600x400?text=Gambino+Side"]}
+{name:"Not a Glock .22LR Kit", price:350, images:["https://placehold.co/600x400?text=Not+a+Glock+.22LR+Kit+Front","https://placehold.co/600x400?text=Not+a+Glock+.22LR+Kit+Side"]},
+{name:"HD22 Kit", price:500, images:["https://placehold.co/600x400?text=HD22+Front","https://placehold.co/600x400?text=HD22+Side"]},
+{name:"Gambino Kit", price:250, images:["https://placehold.co/600x400?text=Gambino+Front","https://placehold.co/600x400?text=Gambino+Side"]},
+{name:"Cabfare Kit", price:200, images:["https://placehold.co/600x400?text=Cabfare+Front","https://placehold.co/600x400?text=Cabfare+Side"]},
+{name:"Harlot Kit", price:150, images:["https://placehold.co/600x400?text=Harlot+Front","https://placehold.co/600x400?text=Harlot+Side"]},
+{name:"HD22 Complete", price:625, images:["https://placehold.co/600x400?text=HD22+Complete+Front","https://placehold.co/600x400?text=HD22+Complete+Side"]},
+{name:"Not a Glock .22LR Complete", price:560, images:["https://placehold.co/600x400?text=Not+a+Glock+.22LR+Complete+Front","https://placehold.co/600x400?text=Not+a+Glock+.22LR+Complete+Side"]},
+{name:"Gambino Complete", price:400, images:["https://placehold.co/600x400?text=Gambino+Complete+Front","https://placehold.co/600x400?text=Gambino+Complete+Side"]},
+{name:"Cabfare Complete", price:350, images:["https://placehold.co/600x400?text=Cabfare+Complete+Front","https://placehold.co/600x400?text=Cabfare+Complete+Side"]},
+{name:"Harlot Complete", price:250, images:["https://placehold.co/600x400?text=Harlot+Complete+Front","https://placehold.co/600x400?text=Harlot+Complete+Side"]},
+{name:"Switch", price:25, images:["https://placehold.co/600x400?text=Switch+Front","https://placehold.co/600x400?text=Switch+Side"]}
 ];
 
 function renderProducts(){
@@ -235,17 +236,6 @@ new QRCode(document.getElementById("qr"),`bitcoin:${BTC_ADDRESS}?amount=${btc}`)
 function closePay(){document.getElementById("paybar").style.display="none"}
 function toast(){const t=document.getElementById("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1200);}
 fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd").then(r=>r.json()).then(d=>btcRate=1/d.bitcoin.usd);
-
-// Language change
-function changeLang(lang,flag){
-  const heroTexts={
-    en:["Premium 3D Printed Products","Bitcoin-only checkout · Fully anonymous · Discreet worldwide shipping"],
-    de:["Premium 3D-Druck Produkte","Nur Bitcoin-Zahlung · Vollständig anonym · Diskreter weltweiter Versand"],
-    fr:["Produits 3D Premium","Paiement uniquement en Bitcoin · Entièrement anonyme · Livraison discrète dans le monde entier"]
-  };
-  document.getElementById("heroTitle").innerText = heroTexts[lang][0];
-  document.getElementById("heroDesc").innerText = heroTexts[lang][1];
-}
 </script>
 </body>
 </html>
