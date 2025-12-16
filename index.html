@@ -28,12 +28,7 @@ line-height:1.6;
 overflow-x:hidden;
 }
 
-/* GLOBAL CONTAINER */
-.container{
-max-width:1200px;
-margin:0 auto;
-padding:0 20px;
-}
+.container{max-width:1200px;margin:auto;padding:0 20px}
 
 /* SHIPPING BAR */
 .ship-banner{
@@ -50,14 +45,12 @@ overflow:hidden;
 }
 .ship-banner span{
 font-weight:800;
-color:#ffdada;
 white-space:nowrap;
-animation:marquee 6s ease-in-out infinite alternate;
+animation:marquee 7s ease-in-out infinite alternate;
 }
 @keyframes marquee{
 0%{transform:translateX(120%)}
-50%{transform:translateX(-10%)}
-100%{transform:translateX(120%)}
+100%{transform:translateX(-20%)}
 }
 
 /* HEADER */
@@ -90,62 +83,49 @@ min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-text-align:center;
 background:url("background.png") center/cover no-repeat;
-padding-top:110px;
+padding-top:120px;
 }
 .hero-box{
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.65);
 padding:40px 30px;
-border-radius:18px;
+border-radius:20px;
 max-width:900px;
-box-shadow:0 12px 40px var(--shadow);
+text-align:center;
+box-shadow:0 20px 60px var(--shadow);
 }
-.hero h2{
-font-size:48px;
-margin-bottom:12px;
-}
+.hero h2{font-size:48px;margin-bottom:12px}
 .hero p{opacity:.9}
-.stars{
-margin-top:10px;
-color:#f5c542;
-font-size:20px;
-}
+.stars{color:#f5c542;margin-top:10px;font-size:20px}
 
 /* MATERIALS */
 .materials{
 position:relative;
-padding:100px 0;
+padding:120px 20px;
 }
-.materials::before{
-content:"";
-position:absolute;
-inset:0;
+.materials-bg{
+position:absolute;inset:0;
 background:url("filament.png") center/cover no-repeat;
-opacity:.25;
+}
+.materials-overlay{
+position:absolute;inset:0;
+background:rgba(0,0,0,.65);
 }
 .materials-inner{
 position:relative;
 max-width:900px;
-margin:0 auto;
-background:rgba(0,0,0,.65);
+margin:auto;
 padding:40px;
-border-radius:18px;
+background:rgba(0,0,0,.4);
+border-radius:20px;
 text-align:center;
-box-shadow:0 12px 40px var(--shadow);
-}
-
-/* SECTIONS */
-.section{
-padding:90px 0;
-}
-.section h2{
-text-align:center;
-font-size:36px;
-margin-bottom:40px;
+box-shadow:0 20px 60px var(--shadow);
 }
 
 /* PRODUCTS */
+.section{padding:90px 0}
+.section h2{text-align:center;font-size:36px;margin-bottom:40px}
+
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -157,8 +137,12 @@ border:1px solid var(--border);
 border-radius:18px;
 padding:20px;
 text-align:center;
-display:flex;
-flex-direction:column;
+transition:.3s;
+cursor:pointer;
+}
+.product:hover{
+transform:translateY(-6px);
+box-shadow:0 14px 30px var(--shadow);
 }
 .product img{
 width:100%;
@@ -167,13 +151,7 @@ object-fit:cover;
 border-radius:12px;
 margin-bottom:12px;
 }
-.product h3{margin-bottom:6px}
-.ordered{
-color:var(--ok);
-font-size:14px;
-margin-bottom:10px;
-}
-.product button{margin-top:auto}
+.orders{color:var(--ok);font-size:14px;margin-bottom:8px}
 
 /* BUTTONS */
 button{
@@ -188,30 +166,65 @@ cursor:pointer;
 button:hover{background:var(--accent-dark)}
 
 /* CART */
-#cartPopup,#paybar{
+#cartPopup{
 display:none;
 position:fixed;
-right:20px;
+top:20px;right:20px;
 width:360px;
 background:var(--panel);
-border-radius:18px;
 padding:22px;
+border-radius:18px;
 z-index:500;
-box-shadow:0 12px 40px var(--shadow);
+box-shadow:0 20px 60px var(--shadow);
 }
-#cartPopup{top:20px}
-#paybar{bottom:20px;text-align:center}
 .close{
-position:absolute;
-top:10px;
-right:14px;
-font-size:20px;
-background:none;
-border:none;
-color:#fff;
+position:absolute;top:10px;right:14px;
+font-size:20px;background:none;border:none;color:#fff;
 }
 
-/* FLOAT CART */
+/* MODAL */
+#modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+z-index:600;
+align-items:center;
+justify-content:center;
+}
+.modal-box{
+background:var(--panel);
+max-width:420px;
+width:90%;
+border-radius:20px;
+padding:25px;
+text-align:center;
+box-shadow:0 20px 60px var(--shadow);
+}
+.modal-box img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:14px;
+margin-bottom:14px;
+}
+
+/* TOAST */
+.toast{
+position:fixed;
+bottom:140px;
+right:20px;
+background:var(--accent);
+padding:14px 24px;
+border-radius:30px;
+font-weight:700;
+opacity:0;
+transform:translateY(20px);
+transition:.35s;
+z-index:700;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+
 .cart-fab{
 position:fixed;
 right:20px;
@@ -222,7 +235,6 @@ border-radius:40px;
 z-index:400;
 }
 
-/* FOOTER */
 footer{
 border-top:1px solid var(--border);
 padding:60px 20px;
@@ -233,7 +245,6 @@ opacity:.7;
 /* MOBILE */
 @media(max-width:700px){
 .hero h2{font-size:32px}
-.materials-inner{padding:30px}
 }
 </style>
 </head>
@@ -250,7 +261,6 @@ opacity:.7;
 <nav>
 <a href="#shop">Shop</a>
 <a href="#" onclick="showCart()">Cart</a>
-<a href="#disclaimer">Disclaimer</a>
 </nav>
 </div>
 </header>
@@ -264,11 +274,13 @@ opacity:.7;
 </section>
 
 <section class="materials">
+<div class="materials-bg"></div>
+<div class="materials-overlay"></div>
 <div class="materials-inner">
 <h2>Our Materials & Process</h2>
 <p>
-All products are handcrafted or 3D printed using our PLA+ filament blended with carbon and metal particles for extra strength.
-100% infill ensures maximum durability. Orders are checked rigorously.
+All products are handcrafted or 3D printed using PLA+ filament blended with carbon and metal particles for extra strength.
+100% infill ensures maximum durability. Orders are rigorously checked.
 Bitcoin-only payments protect privacy. Discreet worldwide packaging.
 </p>
 </div>
@@ -279,75 +291,136 @@ Bitcoin-only payments protect privacy. Discreet worldwide packaging.
 <div class="products" id="products"></div>
 </section>
 
+<!-- CART -->
 <div id="cartPopup">
 <button class="close" onclick="closeCart()">×</button>
 <h3>Shopping Cart</h3>
 <div id="cartItems"></div>
-<p>Total: €<span id="total">0.00</span></p>
-<button onclick="showPay()" style="width:100%">Checkout (Bitcoin)</button>
+<p>Total: $<span id="total">0.00</span></p>
 </div>
 
-<div id="paybar">
-<button class="close" onclick="closePay()">×</button>
-<p>Send BTC to:</p>
-<p style="word-break:break-all;font-weight:700">
-bc1qdsv6cw95hmqkzn05zuxncx6cvcfn4ezh0rq9hy
-</p>
+<!-- PRODUCT MODAL -->
+<div id="modal" onclick="closeModal(event)">
+<div class="modal-box">
+<button class="close" onclick="hideModal()">×</button>
+<img id="mImg">
+<h3 id="mName"></h3>
+<p id="mDesc"></p>
+<p><strong>$<span id="mPrice"></span></strong></p>
+<p class="orders"><span id="mOrders"></span> orders</p>
+<button onclick="addFromModal()">Add to cart</button>
+</div>
 </div>
 
+<div class="toast" id="toast">Added to cart</div>
 <button class="cart-fab" onclick="showCart()">🛒 Cart</button>
 
-<footer>© 2025 3DPrintedUSA · Bitcoin only · International shipping</footer>
+<footer>© 2025 3DPrintedUSA · Bitcoin only · Worldwide shipping</footer>
 
 <script>
-/* SCROLL HIDE */
 let last=0;
 window.addEventListener("scroll",()=>{
 const cur=window.pageYOffset;
-document.querySelector("header").style.transform =
-cur>last?"translateY(-120%)":"translateY(0)";
-document.querySelector(".ship-banner").style.transform =
-cur>last?"translateY(-120%)":"translateY(0)";
+document.querySelector("header").style.transform=cur>last?"translateY(-120%)":"translateY(0)";
+document.querySelector(".ship-banner").style.transform=cur>last?"translateY(-120%)":"translateY(0)";
 last=cur;
 });
 
-/* PRODUCTS */
+const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const base=rand(900,1400);
+
 const products=[
-{name:"Not a Glock .22LR Kit",price:350,img:"NAG2.jpg",ordered:1029},
-{name:"HD22 Kit",price:500,img:"hs222.jpg",ordered:1029},
-{name:"Gambino Kit",price:250,img:"gambino2.jpg",ordered:1029},
-{name:"Cabfare Kit",price:200,img:"cabfare2.jpg",ordered:1029},
-{name:"Harlot Kit",price:150,img:"harlot2.jpg",ordered:1029},
+{
+name:"Not a Glock .22LR Kit",
+price:399,
+img:"NAG2.jpg",
+orders:base+rand(0,150),
+desc:"High-quality precision printed kit using reinforced PLA+ filament."
+},
+{
+name:"HD22 Kit",
+price:549,
+img:"hs222.jpg",
+orders:base+rand(0,150),
+desc:"Durable and reliable design with 100% infill construction."
+},
+{
+name:"Gambino Kit",
+price:279,
+img:"gambino2.jpg",
+orders:base+rand(0,150),
+desc:"Compact design, strong material blend, tested for durability."
+},
+{
+name:"Cabfare Kit",
+price:229,
+img:"cabfare2.jpg",
+orders:base+rand(0,150),
+desc:"Reinforced structure for long-term reliability."
+},
+{
+name:"Harlot Kit",
+price:179,
+img:"harlot2.jpg",
+orders:base+rand(0,150),
+desc:"Minimalist design, lightweight and extremely strong."
+}
 ];
 
 const cart=[];
+let activeProduct=null;
+
 function render(){
 const el=document.getElementById("products");
 el.innerHTML="";
-products.forEach(p=>{
+products.forEach((p,i)=>{
 el.innerHTML+=`
-<div class="product">
+<div class="product" onclick="showModal(${i})">
 <img src="${p.img}">
 <h3>${p.name}</h3>
-<p>€${p.price}</p>
-<div class="ordered">${p.ordered}x besteld</div>
-<button onclick="add('${p.name}',${p.price})">Add to cart</button>
+<p>$${p.price}</p>
+<div class="orders">${p.orders} orders</div>
+<button onclick="event.stopPropagation();showModal(${i})">View details</button>
 </div>`;
 });
 }
 render();
 
-function add(n,p){cart.push({n,p});update()}
-function update(){
+function showModal(i){
+activeProduct=products[i];
+mImg.src=activeProduct.img;
+mName.innerText=activeProduct.name;
+mDesc.innerText=activeProduct.desc;
+mPrice.innerText=activeProduct.price;
+mOrders.innerText=activeProduct.orders;
+modal.style.display="flex";
+}
+
+function hideModal(){modal.style.display="none"}
+function closeModal(e){if(e.target.id==="modal")hideModal()}
+
+function addFromModal(){
+cart.push(activeProduct);
+updateCart();
+toast();
+hideModal();
+}
+
+function updateCart(){
 let t=0,h="";
-cart.forEach(i=>{t+=i.p;h+=`${i.n}<br>`});
+cart.forEach(i=>{t+=i.price;h+=`${i.name}<br>`});
 cartItems.innerHTML=h;
 total.innerText=t.toFixed(2);
 }
+
+function toast(){
+const t=document.getElementById("toast");
+t.classList.add("show");
+setTimeout(()=>t.classList.remove("show"),1400);
+}
+
 function showCart(){cartPopup.style.display="block"}
 function closeCart(){cartPopup.style.display="none"}
-function showPay(){paybar.style.display="block"}
-function closePay(){paybar.style.display="none"}
 </script>
 
 </body>
