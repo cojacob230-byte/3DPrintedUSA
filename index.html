@@ -30,7 +30,7 @@ header{position:sticky;top:42px;background:var(--bg);border-bottom:1px solid var
 .close-overlay{position:absolute;top:30px;right:30px;background:none;border:none;color:#fff;font-size:40px;cursor:pointer;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s}
 .close-overlay:hover{background:rgba(255,255,255,0.1)}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:url("background.png") center/cover no-repeat;padding-top:120px}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url("background.png") center/cover no-repeat;padding-top:120px}
 .hero-box{background:rgba(0,0,0,.65);padding:42px 32px;border-radius:22px;max-width:900px;text-align:center;box-shadow:0 20px 60px var(--shadow)}
 .hero h2{font-size:48px;margin-bottom:20px}
 .hero-tagline{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin:25px 0 35px}
@@ -61,8 +61,8 @@ button:hover{background:var(--accent-dark)}
 #cartPopup{display:none;position:fixed;right:20px;top:20px;width:360px;background:var(--panel);padding:22px;border-radius:20px;z-index:500;box-shadow:0 20px 60px var(--shadow)}
 .close{position:absolute;top:10px;right:14px;font-size:20px;background:none;border:none;color:#fff}
 .payment-popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:1000;align-items:center;justify-content:center}
-.payment-container{background:linear-gradient(135deg, #0a1929 0%, #111 100%);border-radius:25px;padding:0;max-width:500px;width:90%;overflow:hidden;border:1px solid rgba(31,140,255,0.2);box-shadow:0 25px 50px rgba(0,0,0,0.5)}
-.payment-header{background:linear-gradient(90deg, #0f6ac3 0%, #1f8cff 100%);padding:25px;text-align:center}
+.payment-container{background:linear-gradient(135deg, #0a1929 0%, #111 100%);border-radius:25px;padding:0;max-width:450px;width:90%;max-height:85vh;overflow-y:auto;border:1px solid rgba(31,140,255,0.2);box-shadow:0 25px 50px rgba(0,0,0,0.5)}
+.payment-header{background:linear-gradient(90deg, #0f6ac3 0%, #1f8cff 100%);padding:25px;text-align:center;position:sticky;top:0;z-index:1}
 .payment-header h2{color:#fff;font-size:24px;margin:0}
 .payment-body{padding:30px}
 .amount-display{background:rgba(0,0,0,0.3);border-radius:15px;padding:20px;text-align:center;margin-bottom:25px;border:1px solid rgba(255,255,255,0.1)}
@@ -83,8 +83,7 @@ button:hover{background:var(--accent-dark)}
 .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:25px 0}
 .payment-option{background:rgba(255,255,255,0.05);border-radius:12px;padding:15px;text-align:center;border:1px solid rgba(255,255,255,0.1);cursor:pointer;transition:.3s}
 .payment-option:hover{background:rgba(31,140,255,0.2);border-color:var(--accent)}
-.payment-icon{height:40px;margin-bottom:10px;display:flex;justify-content:center;align-items:center}
-.payment-icon img{max-height:40px;max-width:100%;object-fit:contain}
+.payment-icon{font-size:32px;margin-bottom:10px;display:flex;justify-content:center;align-items:center;height:40px}
 .option-name{font-weight:600;font-size:14px;margin-top:5px}
 .option-sub{font-size:11px;color:#999;margin-top:5px}
 .payment-footer{background:rgba(0,0,0,0.5);padding:15px;text-align:center;border-top:1px solid rgba(255,255,255,0.1)}
@@ -95,7 +94,9 @@ button:hover{background:var(--accent-dark)}
 .disclaimer h2{text-align:center;margin-bottom:28px;color:#fff}.disclaimer p{max-width:980px;margin:0 auto 18px;opacity:.95;text-align:left;color:#fff}
 footer{border-top:1px solid var(--border);padding:50px 20px;text-align:center;opacity:.9}
 .shipping-carriers{display:flex;justify-content:center;align-items:center;gap:25px;margin:30px 0;flex-wrap:wrap}
-.carrier-logo{height:40px;filter:brightness(0) invert(1);opacity:0.8}
+.carrier-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.carrier-icon{font-size:28px;color:#fff;opacity:0.9}
+.carrier-name{font-size:12px;color:#999}
 .social-buttons{margin-top:20px;display:flex;justify-content:center;gap:20px}
 .social-buttons a{color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border:1px solid var(--border);border-radius:12px;transition:.3s}
 .social-buttons a:hover{background:var(--accent);color:#000;}
@@ -108,8 +109,9 @@ footer{border-top:1px solid var(--border);padding:50px 20px;text-align:center;op
   .hero-tagline{flex-direction:column;align-items:center;gap:10px}
   .tagline-item{width:100%;max-width:300px;justify-content:center}
   .shipping-carriers{gap:15px}
-  .carrier-logo{height:30px}
+  .carrier-icon{font-size:24px}
   .product h3{min-height:auto;font-size:16px}
+  .payment-container{max-height:90vh}
 }
 </style>
 </head>
@@ -187,11 +189,26 @@ Discreet worldwide shipping
 <footer>
 <div>© 2025 3DPrintedUSA · Worldwide Shipping 🌎</div>
 <div class="shipping-carriers">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" alt="Amazon Logistics" class="carrier-logo" style="height:35px;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/USPS_Logo.svg/2560px-USPS_Logo.svg.png" alt="USPS" class="carrier-logo" style="height:35px;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/UPS_Logo.svg/2560px-UPS_Logo.svg.png" alt="UPS" class="carrier-logo" style="height:35px;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/DHL_Express_Logo.svg/2560px-DHL_Express_Logo.svg.png" alt="DHL" class="carrier-logo" style="height:35px;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/FedEx_2014_logo.svg/2560px-FedEx_2014_logo.svg.png" alt="FedEx" class="carrier-logo" style="height:35px;">
+<div class="carrier-item">
+<div class="carrier-icon">📦</div>
+<div class="carrier-name">USPS</div>
+</div>
+<div class="carrier-item">
+<div class="carrier-icon">🚚</div>
+<div class="carrier-name">UPS</div>
+</div>
+<div class="carrier-item">
+<div class="carrier-icon">✈️</div>
+<div class="carrier-name">DHL</div>
+</div>
+<div class="carrier-item">
+<div class="carrier-icon">📮</div>
+<div class="carrier-name">FedEx</div>
+</div>
+<div class="carrier-item">
+<div class="carrier-icon">🏪</div>
+<div class="carrier-name">Amazon</div>
+</div>
 </div>
 <div class="social-buttons">
 <a href="https://tiktok.com/@3DPrintedUSA" target="_blank">TikTok 🎵</a>
@@ -240,30 +257,22 @@ Discreet worldwide shipping
 
 <div class="payment-options">
 <div class="payment-option" onclick="window.open('https://cash.app/bitcoin', '_blank')">
-<div class="payment-icon">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/CashApp_Logo.svg/2560px-CashApp_Logo.svg.png" alt="CashApp">
-</div>
+<div class="payment-icon">💰</div>
 <div class="option-name">CashApp</div>
 <div class="option-sub">Buy BTC Instantly</div>
 </div>
 <div class="payment-option" onclick="window.open('https://www.binance.com/en/buy-bitcoin', '_blank')">
-<div class="payment-icon">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Binance_Logo.png/2560px-Binance_Logo.png" alt="Binance">
-</div>
+<div class="payment-icon">⚡</div>
 <div class="option-name">Binance</div>
 <div class="option-sub">Trade & Buy</div>
 </div>
 <div class="payment-option" onclick="window.open('https://www.coinbase.com/buy-bitcoin', '_blank')">
-<div class="payment-icon">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Coinbase.svg/2560px-Coinbase.svg.png" alt="Coinbase">
-</div>
+<div class="payment-icon">🪙</div>
 <div class="option-name">Coinbase</div>
 <div class="option-sub">Easy Purchase</div>
 </div>
 <div class="payment-option" onclick="window.open('https://kraken.com/buy-bitcoin', '_blank')">
-<div class="payment-icon">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Kraken_logo.svg/2560px-Kraken_logo.svg.png" alt="Kraken">
-</div>
+<div class="payment-icon">🔱</div>
 <div class="option-name">Kraken</div>
 <div class="option-sub">Secure Exchange</div>
 </div>
@@ -298,25 +307,16 @@ cojacob230@gmail.com
 let last=0;
 window.addEventListener('scroll',()=>{const cur=window.pageYOffset;document.querySelector('header').style.transform=cur>last?'translateY(-120%)':'translateY(0)';document.querySelector('.ship-banner').style.transform=cur>last?'translateY(-120%)':'translateY(0)';last=cur;});
 
-// Random kortingen voor elk product
-const getRandomDiscount = () => {
-  const chance = Math.random();
-  if (chance < 0.3) return 0; // 30% geen korting
-  if (chance < 0.5) return 5; // 20% 5% korting
-  if (chance < 0.7) return 10; // 20% 10% korting
-  if (chance < 0.85) return 15; // 15% 15% korting
-  return 20; // 15% 20% korting
-};
-
 const calculateDiscountedPrice = (price, discount) => {
   return price * (1 - discount/100);
 };
 
-// Producten met nieuwe beschrijvingen voor 99% printed pistols
+// Vaste kortingen per product (geen random meer)
 const products=[
   {
     name:"Not a Glock .22LR Kit",
     price:699,
+    discount:15,
     img:"NAG2.jpg",
     orders:Math.floor(Math.random() * (5000 - 800 + 1)) + 800,
     desc:"99% printed pistol platform - only requires basic hardware springs. High-strength reinforced PLA+ kit featuring our proprietary metal-carbon composite for maximum durability. This precision-engineered .22LR platform offers exceptional reliability and perfect fitment with all standard components. Each kit includes reinforced rails, enhanced trigger guard, and stress-tested frame components ready for assembly."
@@ -324,6 +324,7 @@ const products=[
   {
     name:"HD22 Kit",
     price:849,
+    discount:10,
     img:"hs222.jpg",
     orders:Math.floor(Math.random() * (4200 - 600 + 1)) + 600,
     desc:"99% printed pistol - heavy-duty construction with 100% infill for ultimate reliability. The HD22 platform is engineered for professional use with reinforced stress points, enhanced magazine well, and precision-machined internal channels. Perfect for those seeking industrial-grade performance from a printed platform with minimal external parts required."
@@ -331,6 +332,7 @@ const products=[
   {
     name:"Gambino Kit",
     price:549,
+    discount:20,
     img:"gambino2.jpg",
     orders:Math.floor(Math.random() * (3800 - 500 + 1)) + 500,
     desc:"99% printed pistol platform - compact high-strength design offering the perfect balance between size and durability. The Gambino features carbon fiber reinforcement in critical stress areas, ergonomic finger grooves, and enhanced grip texture. Ideal for discreet carry while maintaining full functionality with minimal non-printed components."
@@ -338,6 +340,7 @@ const products=[
   {
     name:"Cabfare Kit",
     price:499,
+    discount:5,
     img:"cabfare2.jpg",
     orders:Math.floor(Math.random() * (3500 - 400 + 1)) + 400,
     desc:"99% printed pistol - balanced performance and durability in a versatile platform. The Cabfare kit includes our signature smooth finish with reinforced front rails, enhanced recoil spring channel, and precision alignment features. Requires only basic hardware springs for complete assembly, perfect for both beginners and experienced builders."
@@ -345,6 +348,7 @@ const products=[
   {
     name:"Harlot Kit",
     price:429,
+    discount:15,
     img:"harlot2.jpg",
     orders:Math.floor(Math.random() * (3200 - 300 + 1)) + 300,
     desc:"99% printed pistol - minimalist yet extremely strong design optimized for reliability and simplicity. Metal particles in our composite add substantial weight for improved balance. Features integrated sight channel, reinforced breech face, and streamlined profile for maximum concealability. Requires minimal external hardware for complete assembly."
@@ -352,6 +356,7 @@ const products=[
   {
     name:"FGC-9 9x19 MK1 Rifle",
     price:1499,
+    discount:0,
     img:"fgc9.jpg",
     orders:Math.floor(Math.random() * (2800 - 400 + 1)) + 400,
     desc:"Advanced 9mm carbine platform with revolutionary design. The FGC-9 MK1 features our proprietary metal-carbon PLA+ composite for maximum durability. This semi-automatic platform includes reinforced bolt assembly, precision barrel, and modular rail system. Complete kit includes all printed components and detailed assembly instructions. 98% printed - only requires basic hardware and springs."
@@ -359,6 +364,7 @@ const products=[
   {
     name:"HD22 Complete",
     price:1199,
+    discount:10,
     img:"hs22.jpg",
     orders:Math.floor(Math.random() * (2800 - 200 + 1)) + 200,
     desc:"Fully assembled HD22 unit ready for immediate use. Every component is manufactured from our premium materials and hand-fitted for perfect operation. Includes installed trigger assembly, polished feed ramp, and factory-test fired for reliability assurance. The complete version of our 99% printed pistol platform."
@@ -366,6 +372,7 @@ const products=[
   {
     name:"Not a Glock .22LR Complete",
     price:1099,
+    discount:15,
     img:"NAG.jpg",
     orders:Math.floor(Math.random() * (3100 - 250 + 1)) + 250,
     desc:"Complete ready-to-use assembly with perfect fitment guaranteed through our precision calibration process. Features installed sights, enhanced trigger mechanism, and polished barrel interface. Each unit undergoes 50-round function testing before shipment. The complete version of our popular 99% printed pistol."
@@ -373,6 +380,7 @@ const products=[
   {
     name:"Gambino Complete",
     price:899,
+    discount:20,
     img:"gambino.jpg",
     orders:Math.floor(Math.random() * (2600 - 180 + 1)) + 180,
     desc:"Complete high-durability unit with every component made from our custom PLA+ composite. Features installed fire control group, enhanced slide rails, and professional-grade finish. Ready for immediate use with all factory testing completed. The assembled version of our 99% printed compact pistol platform."
@@ -380,6 +388,7 @@ const products=[
   {
     name:"Cabfare Complete",
     price:799,
+    discount:5,
     img:"cabfare.jpg",
     orders:Math.floor(Math.random() * (2400 - 150 + 1)) + 150,
     desc:"Balanced full assembly with exceptional surface finish and reinforced structure. Includes precision-machined barrel, installed trigger components, and enhanced grip texture. Perfect out-of-the-box performance with no fitting required. Complete version of our versatile 99% printed pistol."
@@ -387,6 +396,7 @@ const products=[
   {
     name:"Harlot Complete",
     price:649,
+    discount:15,
     img:"harlot.jpg",
     orders:Math.floor(Math.random() * (2200 - 120 + 1)) + 120,
     desc:"Compact complete solution with professional-grade construction throughout. Features installed firing mechanism, reinforced breech block, and precision-aligned components. Ideal for those seeking maximum concealability with reliable performance. Fully assembled version of our minimalist 99% printed pistol."
@@ -394,6 +404,7 @@ const products=[
   {
     name:"Glock Switch",
     price:129,
+    discount:0,
     img:"switch.jpg",
     orders:Math.floor(Math.random() * (5500 - 1000 + 1)) + 1000,
     desc:"Precision printed accessory manufactured from reinforced materials for reliable performance. Features smooth actuation, positive detents, and durable construction. Compatible with standard platforms and tested for extended service life."
@@ -401,6 +412,7 @@ const products=[
   {
     name:"Knuckle Dusters",
     price:5,
+    discount:0,
     img:"knuckle.jpg",
     orders:Math.floor(Math.random() * (8000 - 1500 + 1)) + 1500,
     desc:"Self-defense knuckle dusters made from reinforced PLA+ with metal particles adding substantial weight for improved impact. Ergonomic finger holes, reinforced stress points, and smooth finish for comfortable carry. Available in standard and extended sizes."
@@ -408,6 +420,7 @@ const products=[
   {
     name:"Invisible Switch",
     price:50,
+    discount:10,
     img:"invisible_switch.jpg",
     orders:Math.floor(Math.random() * (4800 - 800 + 1)) + 800,
     desc:"Discreet and reliable invisible switch with carbon fiber reinforcement ensuring longevity. Features low-profile design, positive tactile feedback, and durable construction. Perfect for those requiring reliable operation with maximum concealment."
@@ -415,6 +428,7 @@ const products=[
   {
     name:"Glock 19 Gen 3 Frame Goud",
     price:100,
+    discount:0,
     img:"glock19_gold.jpg",
     orders:Math.floor(Math.random() * (3600 - 600 + 1)) + 600,
     desc:"Gold-colored Glock 19 Gen 3 frame printed with reinforced PLA+ composite for enhanced durability. Features precise rail dimensions, enhanced grip texture, and perfect pin alignment. Includes reinforced front locking block area and stress-tested frame rails."
@@ -422,6 +436,7 @@ const products=[
   {
     name:"Extended Mag for Not A Glock .22lr",
     price:30,
+    discount:0,
     img:"extended_mag.jpg",
     orders:Math.floor(Math.random() * (5200 - 900 + 1)) + 900,
     desc:"High-capacity extended magazine with reinforced feed lips and body for reliable performance. Features anti-tilt follower, enhanced spring tension, and smooth feed angle. Available in 25-round capacity with optional +5 extension available."
@@ -429,15 +444,15 @@ const products=[
   {
     name:"Glock 26 Magazine 10 Round",
     price:25,
+    discount:0,
     img:"glock26_mag.jpg",
     orders:Math.floor(Math.random() * (5800 - 1100 + 1)) + 1100,
     desc:"10-round magazine for Glock 26 printed with reinforced PLA+ for durability and smooth feeding. Features reinforced feed lips, anti-tilt follower design, and smooth body texture for reliable operation in all conditions."
   }
 ];
 
-// Voeg random kortingen toe aan alle producten
+// Bereken vaste kortingsprijzen
 products.forEach(product => {
-  product.discount = getRandomDiscount();
   product.discountedPrice = calculateDiscountedPrice(product.price, product.discount);
 });
 
@@ -526,7 +541,7 @@ function render(){
     productsDiv.innerHTML+=`
       <div class='product' onclick='showModal(${i})'>
         ${hasDiscount ? `<div class="sale-badge" style="background:${badgeColor}">🔥 ${p.discount}% OFF <span class="discount-amount">SAVE $${(p.price - p.discountedPrice).toFixed(0)}</span></div>` : ''}
-        <img src='${p.img}'>
+        <img src='${p.img}' onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'260\' height=\'190\'><rect width=\'100%\' height=\'100%\' fill=\'%23111\'/><text x=\'50%\' y=\'50%\' font-family=\'Inter\' font-size=\'14\' fill=\'%23fff\' text-anchor=\'middle\' dy=\'.3em\'>${p.name}</text></svg>'">
         <div class="product-content">
           <div>
             <h3>${p.name}</h3>
@@ -560,7 +575,7 @@ function showModal(i){
       <div class='modal-box' style='background:#111;border-radius:22px;padding:26px;text-align:center;max-width:420px;width:90%'>
         <button class='close' onclick='hideModal()'>×</button>
         ${hasDiscount ? `<div class="sale-badge" style="margin-bottom:15px;background:${badgeColor}">🔥 ${activeProduct.discount}% OFF</div>` : ''}
-        <img id='mImg' style='width:100%;height:220px;object-fit:cover;border-radius:16px;margin-bottom:14px'>
+        <img id='mImg' style='width:100%;height:220px;object-fit:cover;border-radius:16px;margin-bottom:14px' onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'420\' height=\'220\'><rect width=\'100%\' height=\'100%\' fill=\'%23111\'/><text x=\'50%\' y=\'50%\' font-family=\'Inter\' font-size=\'14\' fill=\'%23fff\' text-anchor=\'middle\' dy=\'.3em\'>${activeProduct.name}</text></svg>'">
         <h3 id='mName'></h3>
         <p id='mDesc' style='text-align:left;font-size:14px;line-height:1.6;margin:15px 0;'></p>
         <div style="margin:15px 0;">
